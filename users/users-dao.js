@@ -1,41 +1,38 @@
-let users = [];
+import usersModel from "./users-model.js";
 
 
-export const findAllUsers = () => users;
+
+export const findAllUsers = () =>   usersModel.find();
 
 
-export const findUserById = (uid) => {
-    const index = users.findIndex((u) => u._id === uid);
-    if (index !== -1) return users[index];
-    return null;
+export const findUserById = (id) => {
+   return usersModel.findById(id);
+
 };
 
 
 export const findUserByUsername = (username) => {
-    const index = users.findIndex((u) => u.username === username);
-    if (index !== -1) return users[index];
-    return null;
+    return usersModel.findOne({ username });
+
 };
 
 
 export const findUserByCredentials = (username, password) => {
-    const index = users.findIndex((u) => u.username === username && u.password === password);
-    if (index !== -1) return users[index];
-    return null;
+    return usersModel.findOne({ username, password });
+
 };
 
 
-export const createUser = (user) => {users.push(user);
-    return user;}
+export const createUser = (user) =>   usersModel.create(user);
 
 
-export const updateUser = (user) => {
-    const index = users.findIndex((u) => u.username === user.username);
-    users[index] = { ...users[index], ...user };
-    return {status: 'ok'}
+
+export const updateUser = (id,user) => {
+
+   return  usersModel.updateOne({ _id: id }, { $set: user });
+
 };
-export const deleteUser = (uid) => {
-    const index = users.findIndex((u) => u._id === uid);
-    users.splice(index, 1);
-    return {status: 'ok'}
+export const deleteUser = (id) => {
+    return usersModel.deleteOne({ _id: id });
+
 };
