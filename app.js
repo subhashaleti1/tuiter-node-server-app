@@ -7,8 +7,13 @@ import UserController from "./users/users-controller.js"
 import TuitsController from "./controllers/tuits/tuits-controller.js";
 import session from "express-session";
 import AuthController from "./users/auth-controller.js";
+import mongoose from "mongoose";
 
 const app = express();
+
+mongoose.connect("mongodb+srv://subhashaleti:testing123@cluster0.inrmawz.mongodb.net/?retryWrites=true&w=majority"
+
+);
 
 app.use(
     cors({
